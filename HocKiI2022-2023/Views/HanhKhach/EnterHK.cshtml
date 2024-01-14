@@ -1,0 +1,14 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Thêm Hành khách";
+    <h2>Thêm hành khách</h2>
+    <form action="/HanhKhach/InsertHK">
+        <label for="MaHK">Mã Hành khách</label> <input type="text" name="MaHK" /> <br>
+        <label for="HoTen">Tên Hành khách</label> <input type="text" name="HoTen" /> <br>
+        <label for="DiaChi">Địa chỉ</label> <input type="text" name="DiaChi" /> <br>
+        <label for="DienThoai">Số điện thoại</label> <input type="text" name="DienThoai" /> <br>
+        <input type="submit" value="Thêm" />
+    </form>
+}

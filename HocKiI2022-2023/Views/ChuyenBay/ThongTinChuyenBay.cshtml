@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model HocKiI2022_2023.Controllers.ChuyenBay.ThongTinChuyenBayViewModel
+@{
+    <form method="post" action="/ChuyenBay/ThemHanhKhachChuyenBay">
+        <h3>Thông tin chuyến bay</h3>
+        <label for="Chuyen">Chuyến</label> <input type="text" name="Chuyen" value="@Model.ChuyenBay.Chuyen" readonly /> <br>
+        <label for="DDi">Điểm đi</label> <input type="text" name="DDi" value="@Model.ChuyenBay.DDi" readonly /> <br>
+        <label for="DDen">Điểm đến</label> <input type="text" name="DDen" value="@Model.ChuyenBay.DDen" readonly /> <br>
+        <label for="Ngay">Ngày bay</label> <input type="text" name="Ngay" value="@Model.ChuyenBay.Ngay" readonly /> <br>
+        <label for="GBay">Giờ đi</label> <input type="text" name="GBay" value="@Model.ChuyenBay.GBay" readonly /> <br>
+        <label for="GDen">Giờ đến</label> <input type="text" name="GDen" value="@Model.ChuyenBay.GDen" readonly /> <br>
+        @{
+            int chothuong = 0;
+            int chovip = 0;
+            foreach (var item in Model.HanhKhachChuyenBay)
+            {
+                bool isVip = (bool)item.GetType().GetProperty("LoaiGhe").GetValue(item, null);
+                if (isVip)
+                    chothuong++;
+                else 
+                    chovip++;
+            }
+        }
+        <input type="hidden" name="MaCH" value="@Model.ChuyenBay.MaCH" />
+        <input type="hidden" name="ChoThuong" value="@chothuong" /> 
+        <input type="hidden" name="ChoVip" value="@chovip" />
+        <input type="hidden" name="Thuong" value="@Model.ChuyenBay.Thuong" />
+        <input type="hidden" name="Vip" value="@Model.ChuyenBay.Vip" />
+        <label>Chỗ Vip</label>
+        <input type="text" value="@chovip/@Model.ChuyenBay.Vip" /> <br>
+        <label>Chỗ thường</label>
+        <input type="text"  value="@chothuong/@Model.ChuyenBay.Thuong" /> <br>
+        <input type="submit" value="Thêm hành khách" />
+        <table>
+            <tr>
+                <th>Họ tên khách hàng</th>
+                <th>Điện thoại</th>
+                <th>Loại ghế</th>
+                <th>Số ghế</th>
+                <th>Chức năng</th>
+            </tr>
+            @foreach (var item in Model.HanhKhachChuyenBay)
+            {
+                <tr>
+                    <td>@item.GetType().GetProperty("HoTen").GetValue(item, null)</td>
+                    <td>@item.GetType().GetProperty("DienThoai").GetValue(item, null)</td>
+                    @{
+                        bool isVip = (bool)item.GetType().GetProperty("LoaiGhe").GetValue(item, null);
+                        string loaiGhe = isVip ? "Vip" : "Thuong";
+                    }
+                    <td>@loaiGhe</td>
+                    <td>@item.GetType().GetProperty("SoGhe").GetValue(item, null)</td>
+                    <td>
+                        <a href="DeleteCT_CB?MaHK=@item.GetType().GetProperty("MaHK").GetValue(item, null)&MaCH=@Model.ChuyenBay.MaCH">Xóa</a>
+                        <a href="UpdateCT_CB?MaHK=@item.GetType().GetProperty("MaHK").GetValue(item, null)
+                            &SoGhe=@item.GetType().GetProperty("SoGhe").GetValue(item, null)
+                            &LoaiGhe=@(isVip ? "true" : "false")
+                            &TenHK=@item.GetType().GetProperty("HoTen").GetValue(item, null)
+                            &MaCH=@Model.ChuyenBay.MaCH">Sửa</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </form>
+}

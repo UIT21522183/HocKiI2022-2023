@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CHUYENBAY
+@{
+    ViewData["Title"] = "Thêm Hành khách";
+    <h2>Thêm hành khách</h2>
+        <label for="Chuyen">Chuyến</label> <input type="text" name="Chuyen" value="@Model.Chuyen" /> <br>
+        <label for="DDi">Điểm đi</label> <input type="text" name="DDi" value="@Model.DDi" /> <br>
+        <label for="DDen">Điểm đến</label> <input type="text" name="DDen" value="@Model.DDen" /> <br>
+        <label for="Ngay">Ngày bay</label> <input type="text" name="Ngay" value="@Model.Ngay" /> <br>
+        <label for="GBay">Giờ đi</label> <input type="text" name="GBay" value="@Model.GBay" /> <br>
+        <label for="GDen">Giờ đến</label> <input type="text" name="GDen" value="@Model.GDen" /> <br>
+        <div>Chỗ VIP @ViewData["ChoVip"]/@Model.Vip</div> <br />
+        <div> Chỗ thường @ViewData["ChoThuong"]/@Model.Thuong</div> <br />
+    <form action="/ChuyenBay/ThemHanhKhachChuyenBay2">
+        <input type="hidden" name="MaCH" value="@Model.MaCH" />
+        <label for="MaHK">Mã Hành khách</label> <input type="text" name="MaHK" /> c<br>
+        <label for="HoTen">Tên Hành khách</label> <input type="text" name="HoTen" /> <br>
+        <label for="SoGhe">Số ghế</label> <input type="text" name="SoGhe" /> <br>
+        <label for="LoaiGhe">Loại ghế</label>
+        <select id="LoaiGhe" name="LoaiGhe">
+            <option value="false">Thường</option>
+            <option value="true">Vip</option>
+        </select>
+        <input type="submit" value="Thêm hành khách" />
+    </form>
+}

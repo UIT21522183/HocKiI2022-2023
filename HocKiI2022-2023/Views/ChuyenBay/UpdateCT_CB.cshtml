@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CT_CB
+@{
+
+    <form action="/ChuyenBay/UpdateHanhKhachTrongChuyen">
+        <input type="hidden" name="MaCH" value="@Model.MaCH" />
+        <input type="hidden" name="MaHKCu" value="@Model.MaHK" />
+        <label for="MaHK">Mã Hành khách</label> <input type="text" name="MaHK" value="@Model.MaHK" /> <br>
+        <label for="HoTen">Tên Hành khách</label> <input type="text" name="HoTen" value="@ViewData["HoTen"]" /> <br>
+        <label for="SoGhe">Số ghế</label> <input type="text" name="SoGhe" value="@Model.SoGhe" /> <br>
+        <label for="LoaiGhe">Loại ghế</label>
+        <select id="LoaiGhe" name="LoaiGhe">
+            <option value="false" selected="@(!Model.LoaiGhe)">Thường</option>
+            <option value="true" selected="@Model.LoaiGhe">Vip</option>
+        </select>
+        <input type="submit" value="Cập nhật" />
+    </form>
+}
